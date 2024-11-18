@@ -35,7 +35,7 @@ export default function HomeScreen({ navigation }) {
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity
-        onPress={() => navigation.navigate("Next", { id: item.id })}
+        onPress={() => navigation.navigate("Update", { id: item.id })}
       >
         <View>
           <Text>{item.title}</Text>
