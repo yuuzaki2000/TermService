@@ -48,7 +48,7 @@ export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.upperContainer}>
-        <Text>タイトル：</Text>
+        <Text style={{ fontSize: 20 }}>タイトル：</Text>
         <TextInput
           style={styles.titleBox}
           multiline={true}
@@ -57,7 +57,7 @@ export default function HomeScreen({ navigation }) {
           value={title}
           onChangeText={(txt) => setTitle(txt)}
         />
-        <Text>説明：</Text>
+        <Text style={{ fontSize: 20 }}>説明：</Text>
         <TextInput
           style={styles.titleBox}
           multiline={true}
@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderWidth: 1,
     borderColor: "black",
+    fontSize: 20,
   },
   flatlist: {
     marginTop: 50,

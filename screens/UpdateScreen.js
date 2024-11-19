@@ -1,12 +1,12 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-export default function NextScreen({ route }) {
+export default function UpdateScreen({ route }) {
   const id = route.params.id;
   return (
     <View>
       <Text>{id}</Text>
-      <Text>NextScreen</Text>
+      <Text>UpdateScreen</Text>
     </View>
   );
 }
