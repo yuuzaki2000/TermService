@@ -47,6 +47,30 @@ export default function UpdateScreen({ route }) {
           value={explanation}
           onChangeText={(txt) => setExplanation(txt)}
         />
+        <Button
+          title="更新"
+          onPress={() => {
+            async function insertData() {
+              try {
+                const db = await SQLite.openDatabaseAsync("term_service.db");
+                await db.execAsync(`
+                        CREATE TABLE IF NOT EXISTS term ( id INTEGER PRIMARY KEY NOT NULL, title TEXT NOT NULL, explanation INTEGER);
+                        UPDATE term SET explanation = '${explanation}' WHERE id = ${id};
+                      `);
+                const results = await db.getAllAsync(`
+                        SELECT * FROM term;
+                      `);
+                console.log("results", results);
+                setData(results);
+                setTitle("");
+                setExplanation("");
+              } catch (error) {
+                console.log("Error", error);
+              }
+            }
+            insertData();
+          }}
+        />
       </View>
     </View>
   );
