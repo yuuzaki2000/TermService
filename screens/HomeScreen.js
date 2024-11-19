@@ -48,7 +48,7 @@ export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.upperContainer}>
-        <Text style={{ fontSize: 20 }}>タイトル：</Text>
+        <Text style={{ fontSize: 15 }}>タイトル：</Text>
         <TextInput
           style={styles.titleBox}
           multiline={true}
@@ -57,7 +57,7 @@ export default function HomeScreen({ navigation }) {
           value={title}
           onChangeText={(txt) => setTitle(txt)}
         />
-        <Text style={{ fontSize: 20 }}>説明：</Text>
+        <Text style={{ fontSize: 15 }}>説明：</Text>
         <TextInput
           style={styles.titleBox}
           multiline={true}
@@ -67,30 +67,32 @@ export default function HomeScreen({ navigation }) {
           onChangeText={(txt) => setExplanation(txt)}
         />
       </View>
-      <Button
-        title="データベースにデータを追加"
-        onPress={() => {
-          async function insertData() {
-            try {
-              const db = await SQLite.openDatabaseAsync("term_service.db");
-              await db.execAsync(`
+      <View style={{ marginTop: 15 }}>
+        <Button
+          title="データベースにデータを追加"
+          onPress={() => {
+            async function insertData() {
+              try {
+                const db = await SQLite.openDatabaseAsync("term_service.db");
+                await db.execAsync(`
                         CREATE TABLE IF NOT EXISTS term ( id INTEGER PRIMARY KEY NOT NULL, title TEXT NOT NULL, explanation INTEGER);
                         INSERT INTO term (title, explanation) VALUES ('${title}','${explanation}');
                       `);
-              const results = await db.getAllAsync(`
+                const results = await db.getAllAsync(`
                         SELECT * FROM term;
                       `);
-              console.log("results", results);
-              setData(results);
-              setTitle("");
-              setExplanation("");
-            } catch (error) {
-              console.log("Error", error);
+                console.log("results", results);
+                setData(results);
+                setTitle("");
+                setExplanation("");
+              } catch (error) {
+                console.log("Error", error);
+              }
             }
-          }
-          insertData();
-        }}
-      />
+            insertData();
+          }}
+        />
+      </View>
       <Text>要素数：{data.length}</Text>
       <FlatList
         style={styles.flatlist}
@@ -114,7 +116,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderWidth: 1,
     borderColor: "black",
-    fontSize: 20,
+    fontSize: 15,
   },
   flatlist: {
     marginTop: 50,
